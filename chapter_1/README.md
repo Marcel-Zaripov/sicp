@@ -327,11 +327,11 @@ There are some useful built in predicates like `<, >, =, and, or, not`.
 
 **Exercises**
 
-- [Exercise 1.1 Result of sequence of expressions](./chapter1/exercise/ex1-01.scm)
-- [Exercise 1.2 Math expression to procedure](./chapter1/exercise/ex1-02.scm)
-- [Exercise 1.3 Procedure to return sum of 2 biggest numbers out of three](./chapter1/exercise/ex1-03.scm)
-- [Exercise 1.4 Describe behavior of the procedure](./chapter1/exercise/ex1-04.scm)
-- [Exercise 1.5 Procedure to determine applicative-order evaluation or normal-order evaluation](./chapter1/exercise/ex1-05.scm)
+- [Exercise 1.1 Result of sequence of expressions](./chapter_1/exercise/ex1-01.scm)
+- [Exercise 1.2 Math expression to procedure](./chapter_1/exercise/ex1-02.scm)
+- [Exercise 1.3 Procedure to return sum of 2 biggest numbers out of three](./chapter_1/exercise/ex1-03.scm)
+- [Exercise 1.4 Describe behavior of the procedure](./chapter_1/exercise/ex1-04.scm)
+- [Exercise 1.5 Procedure to determine applicative-order evaluation or normal-order evaluation](./chapter_1/exercise/ex1-05.scm)
 
 #### 1.1.7 Example: Square Roots by Newton's Method
 
@@ -415,9 +415,9 @@ Note: sqrt-iter demonstrate how to accomplish iteration with ordinary procedure 
 
 **Exercises**
 
-- [Exercise 1.6 New-if in the procedure and why it is a bad idea](./chapter1/exercise/ex1-06.scm)
-- [Exercise 1.7 Designing flexibly good-enough? alternative](./chapter1/exercise/ex1-07.scm)
-- [Exercise 1.8 Implement cube root](./chapter1/exercise/ex1-08.scm)
+- [Exercise 1.6 New-if in the procedure and why it is a bad idea](./chapter_1/exercise/ex1-06.scm)
+- [Exercise 1.7 Designing flexibly good-enough? alternative](./chapter_1/exercise/ex1-07.scm)
+- [Exercise 1.8 Implement cube root](./chapter_1/exercise/ex1-08.scm)
 
 
 #### 1.1.8 Procedures as Black-Box Abstractions
@@ -558,8 +558,8 @@ It is pretty easy to translate many recursive processes to iterative, some tips:
 > Additionally, we can consider the inner calling of fact-iter as just a way of declaring those state variables and keeping them intact in the local name scope.
 
 **Exercises**
-- [Exercise 1.9 Illustrating process of recursive and iterative add procedure](./chapter1/exercise/ex1-09.scm)
-- [Exercise 1.10 Values and mathematical definition of Ackerman's function](./chapter1/exercise/ex1-10.scm)
+- [Exercise 1.9 Illustrating process of recursive and iterative add procedure](./chapter_1/exercise/ex1-09.scm)
+- [Exercise 1.10 Values and mathematical definition of Ackerman's function](./chapter_1/exercise/ex1-10.scm)
 
 
 #### 1.2.2 Tree Recursion
@@ -691,9 +691,9 @@ This algorithm easily translates to procedure:
 Although this implementation has the same redundancies as recursive Fibonacci has, it is not quite so transparently translated into iterative process (*can try to design it for a challenge*). Finally, there is way of smart compiler optimization of execution called LRU Cache (Least Recently Used). *Shape of the process and some more info on this is in [exercise 1.14](./chapter_1/exercises/ex1-14.scm)*
 
 **Exercises**
-- [Exercise 1.11 Implement function recursively and iteratively](./chapter1/exercise/ex1-11.scm)
-- [Exercise 1.12 Pascal's triangle](./chapter1/exercise/ex1-12.scm)
-- [Exercise 1.13 Prove Fib(n) is the closest integer to phi^n / sqrt(5)](./chapter1/exercise/ex1-13.scm)
+- [Exercise 1.11 Implement function recursively and iteratively](./chapter_1/exercise/ex1-11.scm)
+- [Exercise 1.12 Pascal's triangle](./chapter_1/exercise/ex1-12.scm)
+- [Exercise 1.13 Prove Fib(n) is the closest integer to phi^n / sqrt(5)](./chapter_1/exercise/ex1-13.scm)
 
 #### 1.2.3 Orders of Growth
 
@@ -709,8 +709,8 @@ For example, computing factorial recursively, both the number of operations and 
 In general, we only care about crude measurement that describes the shape of the process, so: x^2 = 1000*x^2 = 2*x^2 + 12*x + 534 are all to be considered the same O(x^2).
 
 **Exercises**
-- [Exercise 1.14 Illustrating counting change process](./chapter1/exercise/ex1-14.scm)
-- [Exercise 1.15 Sine of x implementation](./chapter1/exercise/ex1-15.scm)
+- [Exercise 1.14 Illustrating counting change process](./chapter_1/exercise/ex1-14.scm)
+- [Exercise 1.15 Sine of x implementation](./chapter_1/exercise/ex1-15.scm)
 
 
 #### 1.2.4 Exponentiation
@@ -791,10 +791,10 @@ The difference in the number of steps is striking at big values of input. For ex
 Thus, it is always recommended to try to find a way to reduce the input size as fast as possible for better performance.
 
 **Exercises**
-- [Exercise 1.16 Iterative successive squaring exponentiation](./chapter1/exercise/ex1-16.scm)
-- [Exercise 1.17 Repeated multiplication](./chapter1/exercise/ex1-17.scm)
-- [Exercise 1.18 Iterative process for multiplication](./chapter1/exercise/ex1-18.scm)
-- [Exercise 1.19 Successive squaring on Fibonacci](./chapter1/exercise/ex1-19.scm)
+- [Exercise 1.16 Iterative successive squaring exponentiation](./chapter_1/exercise/ex1-16.scm)
+- [Exercise 1.17 Repeated multiplication](./chapter_1/exercise/ex1-17.scm)
+- [Exercise 1.18 Iterative process for multiplication](./chapter_1/exercise/ex1-18.scm)
+- [Exercise 1.19 Successive squaring on Fibonacci](./chapter_1/exercise/ex1-19.scm)
 
 #### 1.2.5 Greatest Common Divisors
 
@@ -841,7 +841,7 @@ log(n) >= k
 ```
 
 **Exercises**
-- [Exercise 1.20 Illustrate GCD process on normal and applicative order evaluation interpreters](./chapter1/exercise/ex1-20.scm)
+- [Exercise 1.20 Illustrate GCD process on normal and applicative order evaluation interpreters](./chapter_1/exercise/ex1-20.scm)
 
 #### 1.2.6 Example: Testing for Primality
 
@@ -957,14 +957,14 @@ Unfortunately, there are still some numbers that can fool Fermat test, meaning t
 Algorithms of this type are called *probabilistic algorithms*.
 
 **Exercises**
-- [Exercise 1.21 Using smallest-divisor procedure on growing numbers](./chapter1/exercise/ex1-21.scm)
-- [Exercise 1.22 Measurements of time of prime number procedures](./chapter1/exercise/ex1-22.scm)
-- [Exercise 1.23 Updating smallest-divisor procedure and measuring its speed](./chapter1/exercise/ex1-23.scm)
-- [Exercise 1.24 Timing and measurements of Fermat test](./chapter1/exercise/ex1-24.scm)
-- [Exercise 1.25 Reusing exponentiation procedure to implement expmod](./chapter1/exercise/ex1-25.scm)
-- [Exercise 1.26 Changed version of expmod to use explicit multiplication](./chapter1/exercise/ex1-26.scm)
-- [Exercise 1.27 Checking Carmichael numbers against Fermat test](./chapter1/exercise/ex1-27.scm)
-- [Exercise 1.28 Implementing Miller-Rabin test](./chapter1/exercise/ex1-28.scm)
+- [Exercise 1.21 Using smallest-divisor procedure on growing numbers](./chapter_1/exercise/ex1-21.scm)
+- [Exercise 1.22 Measurements of time of prime number procedures](./chapter_1/exercise/ex1-22.scm)
+- [Exercise 1.23 Updating smallest-divisor procedure and measuring its speed](./chapter_1/exercise/ex1-23.scm)
+- [Exercise 1.24 Timing and measurements of Fermat test](./chapter_1/exercise/ex1-24.scm)
+- [Exercise 1.25 Reusing exponentiation procedure to implement expmod](./chapter_1/exercise/ex1-25.scm)
+- [Exercise 1.26 Changed version of expmod to use explicit multiplication](./chapter_1/exercise/ex1-26.scm)
+- [Exercise 1.27 Checking Carmichael numbers against Fermat test](./chapter_1/exercise/ex1-27.scm)
+- [Exercise 1.28 Implementing Miller-Rabin test](./chapter_1/exercise/ex1-28.scm)
 
 
 ---
@@ -1055,11 +1055,11 @@ Additionally, as we did before with our abstractions, we can re-use it as buildi
 ```
 
 **Exercises**
-- [Exercise 1.29 Implementing Simpson's Rule to approximate integral](./chapter1/exercise/ex1-29.scm)
-- [Exercise 1.30 Finishing implementation of sum procedure that generates iterative process](./chapter1/exercise/ex1-30.scm)
-- [Exercise 1.31 Implementing product procedure similar to sum for both recursive and iterative processes](./chapter1/exercise/ex1-31.scm)
-- [Exercise 1.32 Generalizing the pattern of sum and product into accumulation](./chapter1/exercise/ex1-32.scm)
-- [Exercise 1.33 Filtered accumulation](./chapter1/exercise/ex1-33.scm)
+- [Exercise 1.29 Implementing Simpson's Rule to approximate integral](./chapter_1/exercise/ex1-29.scm)
+- [Exercise 1.30 Finishing implementation of sum procedure that generates iterative process](./chapter_1/exercise/ex1-30.scm)
+- [Exercise 1.31 Implementing product procedure similar to sum for both recursive and iterative processes](./chapter_1/exercise/ex1-31.scm)
+- [Exercise 1.32 Generalizing the pattern of sum and product into accumulation](./chapter_1/exercise/ex1-32.scm)
+- [Exercise 1.33 Filtered accumulation](./chapter_1/exercise/ex1-33.scm)
 
 #### 1.3.2 Constructing Procedures Using Lambda
 
@@ -1182,7 +1182,7 @@ You can also define variable in the current scope with define (we have been doin
      (* a b)))
 ```
 **Exercises**
-- [Exercise 1.34 Procedure application to itself puzzler](./chapter1/exercise/ex1-34.scm)
+- [Exercise 1.34 Procedure application to itself puzzler](./chapter_1/exercise/ex1-34.scm)
 
 
 #### 1.3.3 Procedures as General Methods
@@ -1314,11 +1314,11 @@ y = (y + x/y) * 1/2
 With this update, procedure works and generates a correct answer, moreover generating the process very much alike to one in original square root procedure.
 
 **Exercises**
-- [Exercise 1.35 Golden ratio proof and approximating it with fixed point procedure](./chapter1/exercise/ex1-35.scm)
-- [Exercise 1.36 Printing and analyzing process of fixed-point with and without average dump for several functions](./chapter1/exercise/ex1-36.scm)
-- [Exercise 1.37 Infinite continued fraction](./chapter1/exercise/ex1-37.scm)
-- [Exercise 1.38 Approximating Euler's constant with continued fraction, based on Euler's expansion](./chapter1/exercise/ex1-38.scm)
-- [Exercise 1.39 Approximating tangent function with continued fraction, based on Lambert's representation](./chapter1/exercise/ex1-39.scm)
+- [Exercise 1.35 Golden ratio proof and approximating it with fixed point procedure](./chapter_1/exercise/ex1-35.scm)
+- [Exercise 1.36 Printing and analyzing process of fixed-point with and without average dump for several functions](./chapter_1/exercise/ex1-36.scm)
+- [Exercise 1.37 Infinite continued fraction](./chapter_1/exercise/ex1-37.scm)
+- [Exercise 1.38 Approximating Euler's constant with continued fraction, based on Euler's expansion](./chapter_1/exercise/ex1-38.scm)
+- [Exercise 1.39 Approximating tangent function with continued fraction, based on Lambert's representation](./chapter_1/exercise/ex1-39.scm)
 
 #### 1.3.4 Procedures as Returned Values
 
@@ -1434,12 +1434,12 @@ In general, programming languages put restrictions on the way we can manipulate 
 - included in data structures.
 
 **Exercises**
-- [Exercise 1.40 Approximating cubic function through Newton's Method](./chapter1/exercise/ex1-40.scm)
-- [Exercise 1.41 Repetitive application of doulbe procedure](./chapter1/exercise/ex1-41.scm)
-- [Exercise 1.42 Defining compose function](./chapter1/exercise/ex1-42.scm)
-- [Exercise 1.43 Defining repeat procedure in terms of compose](./chapter1/exercise/ex1-43.scm)
-- [Exercise 1.44 Defining smooth procedure and a procedure to obtain n-fold smooth function](./chapter1/exercise/ex1-44.scm)
-- [Exercise 1.45 Implementing procedure to finding n-th root by repeatedly applying average dumping as many times as required](./chapter1/exercise/ex1-45.scm)
-- [Exercise 1.46 Generalizing the patter of computation introduced here as iterative improvement](./chapter1/exercise/ex1-46.scm)
+- [Exercise 1.40 Approximating cubic function through Newton's Method](./chapter_1/exercise/ex1-40.scm)
+- [Exercise 1.41 Repetitive application of doulbe procedure](./chapter_1/exercise/ex1-41.scm)
+- [Exercise 1.42 Defining compose function](./chapter_1/exercise/ex1-42.scm)
+- [Exercise 1.43 Defining repeat procedure in terms of compose](./chapter_1/exercise/ex1-43.scm)
+- [Exercise 1.44 Defining smooth procedure and a procedure to obtain n-fold smooth function](./chapter_1/exercise/ex1-44.scm)
+- [Exercise 1.45 Implementing procedure to finding n-th root by repeatedly applying average dumping as many times as required](./chapter_1/exercise/ex1-45.scm)
+- [Exercise 1.46 Generalizing the patter of computation introduced here as iterative improvement](./chapter_1/exercise/ex1-46.scm)
 
 ---
