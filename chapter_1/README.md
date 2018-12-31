@@ -327,11 +327,11 @@ There are some useful built in predicates like `<, >, =, and, or, not`.
 
 **Exercises**
 
-- [Exercise 1.1 Result of sequence of expressions](./chapter_1/exercise/ex1-01.scm)
-- [Exercise 1.2 Math expression to procedure](./chapter_1/exercise/ex1-02.scm)
-- [Exercise 1.3 Procedure to return sum of 2 biggest numbers out of three](./chapter_1/exercise/ex1-03.scm)
-- [Exercise 1.4 Describe behavior of the procedure](./chapter_1/exercise/ex1-04.scm)
-- [Exercise 1.5 Procedure to determine applicative-order evaluation or normal-order evaluation](./chapter_1/exercise/ex1-05.scm)
+- [Exercise 1.1 Result of sequence of expressions](./exercises/ex1-01.scm)
+- [Exercise 1.2 Math expression to procedure](./exercises/ex1-02.scm)
+- [Exercise 1.3 Procedure to return sum of 2 biggest numbers out of three](./exercises/ex1-03.scm)
+- [Exercise 1.4 Describe behavior of the procedure](./exercises/ex1-04.scm)
+- [Exercise 1.5 Procedure to determine applicative-order evaluation or normal-order evaluation](./exercises/ex1-05.scm)
 
 #### 1.1.7 Example: Square Roots by Newton's Method
 
@@ -368,7 +368,7 @@ For example, if we look for square root of 2, we make initial guess of 1:
 Continuing going we will arrive to an answer.
 
 We can express this method in the form of procedure:  
-[*Newton Method Example Listing*](./chapter_1/examples/example_newtons_method.scm)
+[*Newton Method Example Listing*](./examples/example_newtons_method.scm)
 
 ```lisp
 (define (sqrt-iter guess x)
@@ -415,9 +415,9 @@ Note: sqrt-iter demonstrate how to accomplish iteration with ordinary procedure 
 
 **Exercises**
 
-- [Exercise 1.6 New-if in the procedure and why it is a bad idea](./chapter_1/exercise/ex1-06.scm)
-- [Exercise 1.7 Designing flexibly good-enough? alternative](./chapter_1/exercise/ex1-07.scm)
-- [Exercise 1.8 Implement cube root](./chapter_1/exercise/ex1-08.scm)
+- [Exercise 1.6 New-if in the procedure and why it is a bad idea](./exercises/ex1-06.scm)
+- [Exercise 1.7 Designing flexibly good-enough? alternative](./exercises/ex1-07.scm)
+- [Exercise 1.8 Implement cube root](./exercises/ex1-08.scm)
 
 
 #### 1.1.8 Procedures as Black-Box Abstractions
@@ -488,7 +488,7 @@ We will consider recursion and iteration processes on the example of computing f
 Mathematically, factorial function of the number n is defined as:  
 `n! = [(n-1) * (n-2) * (n-3) ... 3 * 2 * 1]`  
 Which readily translates into recursive procedural definition:  
-[*Factorial Examples Listing*](./chapter_1/examples/example_factorial.scm)
+[*Factorial Examples Listing*](./examples/example_factorial.scm)
 
 ```lisp
 (define (factorial n)
@@ -551,22 +551,22 @@ Now let's consider both examples.
 
 It is pretty easy to translate many recursive processes to iterative, some tips:
 - When calling recursively, make sure ever parameter passed can be evaluated before applying it to call.
-- Define state variables. It is usually helpful to have some aggregate variable and a counter, increasing or decreasing it accordingly (like in fact-iter), or two aggregate values, where you take from one and put it in another (later in [exercise1.9](./chapter_1/exercises/exercise1-09.scm)).
+- Define state variables. It is usually helpful to have some aggregate variable and a counter, increasing or decreasing it accordingly (like in fact-iter), or two aggregate values, where you take from one and put it in another (later in [exercise1.9](./exercises/ex1-09.scm)).
 - Devising a procedure, which generates iterative process, it is useful to approach problem from the "bottom". For example, in factorial procedure above, when computing with recursion, we though in terms of `n! = n * (n-1)..`, meaning starting from the top part or the answer and going down. However, for iteration, we start from 1 and go up until the answer, i.e. in terms of `n! = 1 * 2 ... * n`.
 
 > Constructing iteration by means of recursive definition is specific for languages for tail-recursion optimization. However, it can help you think of the way of approaching the problem not only in such language, but also in those that have special forms for iteration, like state variables and approach from the bottom.  
 > Additionally, we can consider the inner calling of fact-iter as just a way of declaring those state variables and keeping them intact in the local name scope.
 
 **Exercises**
-- [Exercise 1.9 Illustrating process of recursive and iterative add procedure](./chapter_1/exercise/ex1-09.scm)
-- [Exercise 1.10 Values and mathematical definition of Ackerman's function](./chapter_1/exercise/ex1-10.scm)
+- [Exercise 1.9 Illustrating process of recursive and iterative add procedure](./exercises/ex1-09.scm)
+- [Exercise 1.10 Values and mathematical definition of Ackerman's function](./exercises/ex1-10.scm)
 
 
 #### 1.2.2 Tree Recursion
 
 Another example of possible process shape and computation is a *tree recursion*.  
 We will tackle it on the example of Fibonacci sequence.  
-[*All Fibonacci Examples Listing*](./chapter_1/examples/example_fib.scm)  
+[*All Fibonacci Examples Listing*](./examples/example_fib.scm)  
 Each number in this sequence is the sum of preceding two:  
 `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...`  
 Mathematical definition:  
@@ -619,7 +619,7 @@ Observations about the pattern of computation:
 - It is typical recursive tree of computation, but it is terrible to do that on Fibonacci, because of the redundant computation (the whole sub-tree for (fib 3) is repeated twice here and even more redundancy comes for bigger numbers).
 - The number of steps required to compute is exactly the number of leaf nodes in the tree.
 - This number happens to be equal to Fib(n+1), meaning the number of steps grows at the same rate as the function itself - exponentially.
-- The growth of Fib(n) can be comprehended with fact that Fib(n) is the closest integer to phi^n / sqrt(5) - proof in [exercise 1.13](./chapter_1/exercises/ex1-13.scm), where `phi = (1 + sqrt(5))/2 ~ 1.6180...` is the golden ratio, satisfying the equation: `phi^2 = phi + 1`
+- The growth of Fib(n) can be comprehended with fact that Fib(n) is the closest integer to phi^n / sqrt(5) - proof in [exercise 1.13](./exercises/ex1-13.scm), where `phi = (1 + sqrt(5))/2 ~ 1.6180...` is the golden ratio, satisfying the equation: `phi^2 = phi + 1`
 - Although the number of steps grows exponentially, the space required grows linearly, with each level of the tree, because only the steps above current node need to be remembered.
 
 Fibonacci can also be expressed as an iterative process. The idea is:
@@ -647,7 +647,7 @@ It seems that this example renders tree recursion useless, since we can come up 
 - If the problem is not so trivial and cannot be translated as easily (next example).
 
 **Example: Counting change**  
-[*Full Counting Change Example Listing*](./chapter_1/examples/example__count_change.scm)  
+[*Full Counting Change Example Listing*](./examples/example_count_change.scm)  
 
 *Problem:*  
 How many different ways can we make change of $ 1.00, given half-dollars, quarters, dimes, nickels, and pennies? More generally, can we write a procedure to compute the number of ways to change any given amount of money?
@@ -688,12 +688,12 @@ This algorithm easily translates to procedure:
         ((= kinds-of-coins 5) 50)))
 ```
 
-Although this implementation has the same redundancies as recursive Fibonacci has, it is not quite so transparently translated into iterative process (*can try to design it for a challenge*). Finally, there is way of smart compiler optimization of execution called LRU Cache (Least Recently Used). *Shape of the process and some more info on this is in [exercise 1.14](./chapter_1/exercises/ex1-14.scm)*
+Although this implementation has the same redundancies as recursive Fibonacci has, it is not quite so transparently translated into iterative process (*can try to design it for a challenge*). Finally, there is way of smart compiler optimization of execution called LRU Cache (Least Recently Used). *Shape of the process and some more info on this is in [exercise 1.14](./exercises/ex1-14.scm)*
 
 **Exercises**
-- [Exercise 1.11 Implement function recursively and iteratively](./chapter_1/exercise/ex1-11.scm)
-- [Exercise 1.12 Pascal's triangle](./chapter_1/exercise/ex1-12.scm)
-- [Exercise 1.13 Prove Fib(n) is the closest integer to phi^n / sqrt(5)](./chapter_1/exercise/ex1-13.scm)
+- [Exercise 1.11 Implement function recursively and iteratively](./exercises/ex1-11.scm)
+- [Exercise 1.12 Pascal's triangle](./exercises/ex1-12.scm)
+- [Exercise 1.13 Prove Fib(n) is the closest integer to phi^n / sqrt(5)](./exercises/ex1-13.scm)
 
 #### 1.2.3 Orders of Growth
 
@@ -709,8 +709,8 @@ For example, computing factorial recursively, both the number of operations and 
 In general, we only care about crude measurement that describes the shape of the process, so: x^2 = 1000*x^2 = 2*x^2 + 12*x + 534 are all to be considered the same O(x^2).
 
 **Exercises**
-- [Exercise 1.14 Illustrating counting change process](./chapter_1/exercise/ex1-14.scm)
-- [Exercise 1.15 Sine of x implementation](./chapter_1/exercise/ex1-15.scm)
+- [Exercise 1.14 Illustrating counting change process](./exercises/ex1-14.scm)
+- [Exercise 1.15 Sine of x implementation](./exercises/ex1-15.scm)
 
 
 #### 1.2.4 Exponentiation
@@ -791,10 +791,10 @@ The difference in the number of steps is striking at big values of input. For ex
 Thus, it is always recommended to try to find a way to reduce the input size as fast as possible for better performance.
 
 **Exercises**
-- [Exercise 1.16 Iterative successive squaring exponentiation](./chapter_1/exercise/ex1-16.scm)
-- [Exercise 1.17 Repeated multiplication](./chapter_1/exercise/ex1-17.scm)
-- [Exercise 1.18 Iterative process for multiplication](./chapter_1/exercise/ex1-18.scm)
-- [Exercise 1.19 Successive squaring on Fibonacci](./chapter_1/exercise/ex1-19.scm)
+- [Exercise 1.16 Iterative successive squaring exponentiation](./exercises/ex1-16.scm)
+- [Exercise 1.17 Repeated multiplication](./exercises/ex1-17.scm)
+- [Exercise 1.18 Iterative process for multiplication](./exercises/ex1-18.scm)
+- [Exercise 1.19 Successive squaring on Fibonacci](./exercises/ex1-19.scm)
 
 #### 1.2.5 Greatest Common Divisors
 
@@ -841,7 +841,7 @@ log(n) >= k
 ```
 
 **Exercises**
-- [Exercise 1.20 Illustrate GCD process on normal and applicative order evaluation interpreters](./chapter_1/exercise/ex1-20.scm)
+- [Exercise 1.20 Illustrate GCD process on normal and applicative order evaluation interpreters](./exercises/ex1-20.scm)
 
 #### 1.2.6 Example: Testing for Primality
 
@@ -957,14 +957,14 @@ Unfortunately, there are still some numbers that can fool Fermat test, meaning t
 Algorithms of this type are called *probabilistic algorithms*.
 
 **Exercises**
-- [Exercise 1.21 Using smallest-divisor procedure on growing numbers](./chapter_1/exercise/ex1-21.scm)
-- [Exercise 1.22 Measurements of time of prime number procedures](./chapter_1/exercise/ex1-22.scm)
-- [Exercise 1.23 Updating smallest-divisor procedure and measuring its speed](./chapter_1/exercise/ex1-23.scm)
-- [Exercise 1.24 Timing and measurements of Fermat test](./chapter_1/exercise/ex1-24.scm)
-- [Exercise 1.25 Reusing exponentiation procedure to implement expmod](./chapter_1/exercise/ex1-25.scm)
-- [Exercise 1.26 Changed version of expmod to use explicit multiplication](./chapter_1/exercise/ex1-26.scm)
-- [Exercise 1.27 Checking Carmichael numbers against Fermat test](./chapter_1/exercise/ex1-27.scm)
-- [Exercise 1.28 Implementing Miller-Rabin test](./chapter_1/exercise/ex1-28.scm)
+- [Exercise 1.21 Using smallest-divisor procedure on growing numbers](./exercises/ex1-21.scm)
+- [Exercise 1.22 Measurements of time of prime number procedures](./exercises/ex1-22.scm)
+- [Exercise 1.23 Updating smallest-divisor procedure and measuring its speed](./exercises/ex1-23.scm)
+- [Exercise 1.24 Timing and measurements of Fermat test](./exercises/ex1-24.scm)
+- [Exercise 1.25 Reusing exponentiation procedure to implement expmod](./exercises/ex1-25.scm)
+- [Exercise 1.26 Changed version of expmod to use explicit multiplication](./exercises/ex1-26.scm)
+- [Exercise 1.27 Checking Carmichael numbers against Fermat test](./exercises/ex1-27.scm)
+- [Exercise 1.28 Implementing Miller-Rabin test](./exercises/ex1-28.scm)
 
 
 ---
@@ -1055,11 +1055,11 @@ Additionally, as we did before with our abstractions, we can re-use it as buildi
 ```
 
 **Exercises**
-- [Exercise 1.29 Implementing Simpson's Rule to approximate integral](./chapter_1/exercise/ex1-29.scm)
-- [Exercise 1.30 Finishing implementation of sum procedure that generates iterative process](./chapter_1/exercise/ex1-30.scm)
-- [Exercise 1.31 Implementing product procedure similar to sum for both recursive and iterative processes](./chapter_1/exercise/ex1-31.scm)
-- [Exercise 1.32 Generalizing the pattern of sum and product into accumulation](./chapter_1/exercise/ex1-32.scm)
-- [Exercise 1.33 Filtered accumulation](./chapter_1/exercise/ex1-33.scm)
+- [Exercise 1.29 Implementing Simpson's Rule to approximate integral](./exercises/ex1-29.scm)
+- [Exercise 1.30 Finishing implementation of sum procedure that generates iterative process](./exercises/ex1-30.scm)
+- [Exercise 1.31 Implementing product procedure similar to sum for both recursive and iterative processes](./exercises/ex1-31.scm)
+- [Exercise 1.32 Generalizing the pattern of sum and product into accumulation](./exercises/ex1-32.scm)
+- [Exercise 1.33 Filtered accumulation](./exercises/ex1-33.scm)
 
 #### 1.3.2 Constructing Procedures Using Lambda
 
@@ -1182,7 +1182,7 @@ You can also define variable in the current scope with define (we have been doin
      (* a b)))
 ```
 **Exercises**
-- [Exercise 1.34 Procedure application to itself puzzler](./chapter_1/exercise/ex1-34.scm)
+- [Exercise 1.34 Procedure application to itself puzzler](./exercises/ex1-34.scm)
 
 
 #### 1.3.3 Procedures as General Methods
@@ -1314,11 +1314,11 @@ y = (y + x/y) * 1/2
 With this update, procedure works and generates a correct answer, moreover generating the process very much alike to one in original square root procedure.
 
 **Exercises**
-- [Exercise 1.35 Golden ratio proof and approximating it with fixed point procedure](./chapter_1/exercise/ex1-35.scm)
-- [Exercise 1.36 Printing and analyzing process of fixed-point with and without average dump for several functions](./chapter_1/exercise/ex1-36.scm)
-- [Exercise 1.37 Infinite continued fraction](./chapter_1/exercise/ex1-37.scm)
-- [Exercise 1.38 Approximating Euler's constant with continued fraction, based on Euler's expansion](./chapter_1/exercise/ex1-38.scm)
-- [Exercise 1.39 Approximating tangent function with continued fraction, based on Lambert's representation](./chapter_1/exercise/ex1-39.scm)
+- [Exercise 1.35 Golden ratio proof and approximating it with fixed point procedure](./exercises/ex1-35.scm)
+- [Exercise 1.36 Printing and analyzing process of fixed-point with and without average dump for several functions](./exercises/ex1-36.scm)
+- [Exercise 1.37 Infinite continued fraction](./exercises/ex1-37.scm)
+- [Exercise 1.38 Approximating Euler's constant with continued fraction, based on Euler's expansion](./exercises/ex1-38.scm)
+- [Exercise 1.39 Approximating tangent function with continued fraction, based on Lambert's representation](./exercises/ex1-39.scm)
 
 #### 1.3.4 Procedures as Returned Values
 
@@ -1434,12 +1434,12 @@ In general, programming languages put restrictions on the way we can manipulate 
 - included in data structures.
 
 **Exercises**
-- [Exercise 1.40 Approximating cubic function through Newton's Method](./chapter_1/exercise/ex1-40.scm)
-- [Exercise 1.41 Repetitive application of doulbe procedure](./chapter_1/exercise/ex1-41.scm)
-- [Exercise 1.42 Defining compose function](./chapter_1/exercise/ex1-42.scm)
-- [Exercise 1.43 Defining repeat procedure in terms of compose](./chapter_1/exercise/ex1-43.scm)
-- [Exercise 1.44 Defining smooth procedure and a procedure to obtain n-fold smooth function](./chapter_1/exercise/ex1-44.scm)
-- [Exercise 1.45 Implementing procedure to finding n-th root by repeatedly applying average dumping as many times as required](./chapter_1/exercise/ex1-45.scm)
-- [Exercise 1.46 Generalizing the patter of computation introduced here as iterative improvement](./chapter_1/exercise/ex1-46.scm)
+- [Exercise 1.40 Approximating cubic function through Newton's Method](./exercises/ex1-40.scm)
+- [Exercise 1.41 Repetitive application of doulbe procedure](./exercises/ex1-41.scm)
+- [Exercise 1.42 Defining compose function](./exercises/ex1-42.scm)
+- [Exercise 1.43 Defining repeat procedure in terms of compose](./exercises/ex1-43.scm)
+- [Exercise 1.44 Defining smooth procedure and a procedure to obtain n-fold smooth function](./exercises/ex1-44.scm)
+- [Exercise 1.45 Implementing procedure to finding n-th root by repeatedly applying average dumping as many times as required](./exercises/ex1-45.scm)
+- [Exercise 1.46 Generalizing the patter of computation introduced here as iterative improvement](./exercises/ex1-46.scm)
 
 ---
