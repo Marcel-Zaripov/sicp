@@ -11,8 +11,8 @@ You may also find some useful links down below, in this very [document](#Useful-
    1. [The Elements of Programming](./chapter_1/README.md#The-Elements-of-Programming)
    2. [Procedures and the Processes They Generate](./chapter_1/README.md#Procedures-and-the-Processes-They-Generate)
    3. [Formulating Abstractions with Higher-Order Procedures](./chapter_1/README.md#Formulating-Abstractions-with-Higher-Order-Procedures)
-2. [Building Abstractions with Data]()
-   1. [Introduction to Data Abstraction]()
+2. [Building Abstractions with Data](./chapter_2/README.md)
+   1. [Introduction to Data Abstraction](./chapter_2/README.md#Introduction-to-Data-Abstraction)
    2. [Hierarchical Data and the Closure Property]()
 
 ---
