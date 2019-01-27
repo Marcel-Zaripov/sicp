@@ -359,6 +359,35 @@ The division is multiplication of first interval by the reciprocal of the second
                    (max p1 p2 p3 p4))))
 ```
 
+An interesting elaboration arises from the implementation of computation of parallel resistance with two equivalent expressions:
+
+```
+R1*R2 / (R1 + R2)
+```
+
+and
+
+```
+1 / (1/R1 + 1/R2)
+```
+
+and implemented in the form of procedures like:
+
+```lisp
+(define (par1 r1 r2)
+  (div-interval (mul-interval r1 r2)
+                (add-interval r1 r2)))
+(define (par2 r1 r2)
+  (let ((one (make-interval 1 1))) 
+    (div-interval one
+                  (add-interval (div-interval one r1)
+                                (div-interval one r2)))))
+```
+
+which should yield equal results, but computing with the above procedures don't.
+
+This happens due to the fact of repetative appearance of the same independant variable, e.g. in our case we have R1 appear twice and each occurance is taken independently. Each of the occurances of the variable mutates resulting intervals differently. The problem is deep-rooted and is related to decision problem (see ex2-16).
+
 **Exercises**
 
 - [Exercise 2.7 Defining interval selectors](./exercises/ex2-07.scm)
@@ -370,6 +399,6 @@ The division is multiplication of first interval by the reciprocal of the second
 - [Exercise 2.13 Formula to approximate percentage tolerance of product of two intervals](./exercises/ex2-13.scm)
 - [Exercise 2.14 Demonstrating defect of inequality of equivalent computations in interval operations](./exercises/ex2-14.scm)
 - [Exercise 2.15 Proving that expression involving less imprecise terms yields answer closer to truth](./exercises/ex2-15.scm)
-- [Exercise 2.16 Explanation of why precise interval logic is next to impossible. Dependency problem.](./exercises/ex2-16.scm)
+- [Exercise 2.16 Explanation of why precise interval logic is next to impossible. Dependency problem in interval arithmetics.](./exercises/ex2-16.scm)
 
 
