@@ -1,7 +1,7 @@
 # Building Abstractions with Data
 
 - [2.1 Introduction to Data Abstraction](#Introduction-to-Data-Abstraction)
-- [2.2 Hierarchical Data and the Closure Property]()
+- [2.2 Hierarchical Data and The Closure Property](#Hierarchical-Data-and-The-Closure-Property)
 - [2.3 Symbolic Data]()
 - [2.4 Multiple Representations for Abstract Data]()
 - [2.5 Systems with Generic Operations]()  
@@ -46,6 +46,7 @@ Later on, *symbolic expressions* will be introduced to enhance expressive power 
 
 Finally, we will learn that different parts of the programs may need to represent data objects differently. This will lead us to the idea of *generic operations*, which must handle multiple data types. In order to maintain modularity in the presence of generic operations we must introduce something more powerful than simple data abstraction rules. Thus, *data-directed programming* is introduced that allows individual data representations to be implemented in isolation and then combined *additively*. To demonstrate the expressive power of the concepts unveiled in this chapter, the chapter is closed with design and implementation of the package for symbolic arithmetic on polynomials, in which coefficients of polynomials can be integers, floats, rational numbers, and even other polynomials. 
 
+---
 
 ## Introduction to Data Abstraction
 
@@ -272,8 +273,8 @@ Pair is provided by procedures `cons`, `car`, and `cdr` and satisfy condition:
 ```
 if x and y are any programming entities,
 
-    if z is (cons x y),
-        then (car z) is x
+  if z is (cons x y),
+      then (car z) is x
         and (cdr z) is y
 ```
 
@@ -359,35 +360,6 @@ The division is multiplication of first interval by the reciprocal of the second
                    (max p1 p2 p3 p4))))
 ```
 
-An interesting elaboration arises from the implementation of computation of parallel resistance with two equivalent expressions:
-
-```
-R1*R2 / (R1 + R2)
-```
-
-and
-
-```
-1 / (1/R1 + 1/R2)
-```
-
-and implemented in the form of procedures like:
-
-```lisp
-(define (par1 r1 r2)
-  (div-interval (mul-interval r1 r2)
-                (add-interval r1 r2)))
-(define (par2 r1 r2)
-  (let ((one (make-interval 1 1))) 
-    (div-interval one
-                  (add-interval (div-interval one r1)
-                                (div-interval one r2)))))
-```
-
-which should yield equal results, but computing with the above procedures don't.
-
-This happens due to the fact of repetative appearance of the same independant variable, e.g. in our case we have R1 appear twice and each occurance is taken independently. Each of the occurances of the variable mutates resulting intervals differently. The problem is deep-rooted and is related to decision problem (see ex2-16).
-
 **Exercises**
 
 - [Exercise 2.7 Defining interval selectors](./exercises/ex2-07.scm)
@@ -399,6 +371,344 @@ This happens due to the fact of repetative appearance of the same independant va
 - [Exercise 2.13 Formula to approximate percentage tolerance of product of two intervals](./exercises/ex2-13.scm)
 - [Exercise 2.14 Demonstrating defect of inequality of equivalent computations in interval operations](./exercises/ex2-14.scm)
 - [Exercise 2.15 Proving that expression involving less imprecise terms yields answer closer to truth](./exercises/ex2-15.scm)
-- [Exercise 2.16 Explanation of why precise interval logic is next to impossible. Dependency problem in interval arithmetics.](./exercises/ex2-16.scm)
+- [Exercise 2.16 Explanation of why precise interval logic is next to impossible. Dependency problem.](./exercises/ex2-16.scm)
+
+---
+
+## Hierarchical Data and The Closure Property
+
+Pairs provide a primitive "glue" to construct data objects. We can represent it in box-and-pointer notation to visualize the concept.
+
+```
+   [#|#] ---> [2]
+  /
+ |
+ v
+[1]
+```
+
+We also have seen that `cons` can combine not only numbers but pairs too (exercises 2.2 & 2.3), meaning that `car` and `cdr` may point to other pairs, thus providing a universal building blocks from which we can construct all sort of data structures. Visualized concept with two ways of representing 1, 2, 3, and 4:
+
+```
+      [#|#] ---> [#|#]        |           [#|#] ---> [4]
+     /          /     \       |          /
+    |          |       |      |         |
+    v          v       v      |         v
+   [#|#]      [3]     [4]     |       [#|#] ---> [#|#]
+  /     \                     |      /          /     \
+ |       |                    |     |          |       |
+ v       v                    |     v          v       v
+[1]     [2]                   |    [1]        [2]     [3]
+```
+
+The key here is the ability to create pairs of pairs, i.e. the elements yielded from a combination can themselves be used in this combination. It is called *closure property* (in the case of pairs - it is closure property of `cons`). Closure allows us to create hierarchical structures, which made up of parts, which themselves are made up of parts, etc. (recursive data structure, kind of)
+
+> [This definition of closure is linked to abstract algebra where a set of elements is said to be closed under an operation if applying the operation to elements in the set produces an element that is again an element of the set. Closure is also utilized to refer to an implementation technique for representing procedures with free variables. Closure is not used in this sense in SICP]
+
+In chapter one we have already used closure in dealing with procedures and expression combinations, where elements of expression combinations can themselves be expression combinations and the same with procedures.
+
+In this context, the consequences of closure are applied to compound data. Some conventional techniques to represent sequences and trees using pairs are coming next. Graphics language that shows closures vividly too.
+
+#### 2.2.1 Representing Sequences
+
+With pairs, having property of closure, we can represent many things, for example sequences - an ordered collection of things, e.g. [1, 2, 3, 4].
+
+There are multiple ways to do that with pairs, but one practical way is to organize it like this:
+
+```
+    [#|#] ---> [#|#] ---> [#|#] ---> [#|/]
+   /          /          /          /
+  |          |          |          |
+  v          v          v          v
+ [1]        [2]        [3]        [4] 
+```
+
+Where `car` of each pair yields an element from the sequence and `cdr` gives the next pair, from which we can follow the rest of the sequence.
+
+`cdr` on the last pair will return `nil`, a special value used to signal "nothing", representing the end of the sequence.
+
+We can get such a structure with this sequence of `cons`:
+
+```lisp
+(cons 1
+      (cons 2
+            (cons 3
+                  (cons 4 nil))))
+```
+
+Such consequent calls to cons is referred to as `list` and thus Scheme provides a primitive to make such structures easily:
+
+```lisp
+(list <a1> <a2> ... <an>)
+
+; is equivalent to
+
+(cons <a1> (cons <a2> (cons ... (cons <an> nil) ...)))
+```
+
+There is also a convention of printing lists like:
+
+```lisp
+(list 1 2 3 4)
+; -> (1 2 3 4)
+```
+
+But `(1 2 3 4)` is just a representation and does not evaluate to the same list of items.
+
+**List Operations**
+
+Representing lists as linked pairs has a conventional set of techniques with it for traversing list, getting elements at a certain position (index), applying operation to each item. Such operations often accompanied by "`cdr`-ing" down the list. For example, `list-ref` procedure to get `n`-th item in the list by following this method:
+
+- for `n = 0` return `car` of the list;
+- otherwise find `list-ref` of the `n - 1` -th item of the `cdr` of the list.
+
+Implemented as:
+
+```lisp
+(define (list-ref items n)
+  (if (= n 0)
+      (car items)
+      (list-ref (cdr items) (- n 1))))
+(define squares (list 1 4 9 16 25))
+
+(list-ref squares 3)
+; -> 16
+```
+
+`cdr`-ing down the list happens very often, which is why Scheme introduces primitive `null?`, which return `#t` if the list is terminated, i.e. has `null` special value at `cdr`. The essence of the function is to check whether the `cdr` of the function returns this special value. An example of going over all the list is getting its length.
+
+A recursive implementation of retrieving the length:
+
+```lisp
+(define (length items)
+  (if (null? items)
+      0
+      (+ 1 (length (cdr items)))))
+(define odds (list 1 3 5 7))
+
+(length odds)
+; -> 4
+```
+
+And a simple iterative plan may be realized as follows:
+
+```lisp
+(define (length items)
+  (define (length-iter a count)
+    (if (null? a)
+        count
+        (length-iter (cdr a) (+ 1 count))))
+  (length-iter items 0))
+```
+
+It is also a case to "cons up" a list, while `cdr`-ing down another list, much like moving stacks of things between each-other.
+
+One example of such useful operation is appending two lists together:
+
+```lisp
+(append squares odds)
+; -> (1 4 9 16 25 1 3 5 7)
+
+(append odds squares)
+; -> (1 3 5 7 1 4 9 16 25)
+```
+
+Append, implemented with recursive plan, follows this logic:
+
+- if `list1` is empty, then the answer is just `list2`
+- otherwise, return `cons` of `car` of the `list1` and the result of `append` of `cdr` of `list1` and `list2`
+
+Or in code:
+
+```lisp
+(define (append list1 list2)
+  (if (null? list1)
+      list2
+      (cons (car list1) (append (cdr list1) list2))))
+```
+
+**Exercises**
+
+- [Exercise 2.17 Implementing `last-pair` procedure to return last element in list](./exercises/ex2-17.scm)
+- [Exercise 2.18 Implementing `reverse` procedure](./exercises/ex2-18.scm)
+- [Exercise 2.19 Updating change counting program to use list](./exercises/ex2-19.scm)
+- [Exercise 2.20 Using dotted tail notation to implement `same-parity` procedure](./exercises/ex2-20.scm)
+
+**Mapping over Lists**
+
+One useful operation on lists is applying one particular operation to all elements of the list, often referred to as mapping.
+
+For example, scaling each value in list:
+
+```lisp
+(define (scale-list items factor)
+  (if (null? items)
+      nil
+      (cons (* (car items) factor)
+            (scale-list (cdr items) factor))))
+(scale-list (list 1 2 3 4 5) 10)
+; -> (10 20 30 40 50)
+```
+
+We can abstract this idea and capture it as a higher order procedure, taking list and another procedure as input, and outputting the resulting list.
+
+```lisp
+(define (map proc items)
+  (if (null? items)
+      nil
+      (cons (proc (car items))
+            (map proc (cdr items)))))
+(map abs (list -10 2.5 -11.6 17))
+; -> (10 2.5 11.6 17)
+
+(map (lambda (x) (* x x))
+     (list 1 2 3 4))
+; -> (1 4 9 16)
+```
+
+Now, we can re-implement `scale-list` procedure.
+
+```lisp
+(define (scale-list items factor)
+  (map (lambda (x) (* x factor))
+       items))
+```
+
+`map` is an important concept not only because it captures a common pattern, but also because it elevate the level of abstraction. Instead of dealing with elements of lists, we can conceptually deal with lists as structure and, as long as they provide conventional interface, do not bother with underlying representation (much like abstraction barriers mentioned earlier).
+
+**Exercises**
+
+- [Exercise 2.21 Completing the implementation of list squaring procedure](./exercises/ex2-21.scm)
+- [Exercise 2.22 Upgrading squaring procedure to evolve iterative process](./exercises/ex2-22.scm)
+- [Exercise 2.23 Implementing `for-each` procedure](./exercises/ex2-23.scm)
+
+#### 2.2.2 Hierarchical Structures
+
+The representation of sequences in terms of pairs (or lists) generalizes to sequences who themselves can be sequences (closed onto themselves, mathematical meaning of closure).
+
+For example, the structure like `((1 2) 3 4)`, which can be constructed by:
+
+```lisp
+(list (cons 1 2) 3 4)
+```
+
+can be regarded as list (pairs) of three elements, with the first item being list (pair) itself - `(1 2)`.
+
+In the box notation of visualizing pairs:
+
+```
+      [#|#] ---> [#|#] ---> [#|/]
+     /          /          /
+    |          |          |
+    v          v          v
+   [#|#]       3          4
+  /     \
+ |       |
+ v       v
+ 1       2
+```
+
+Another way to view this structure is a tree. The elements of the trees are branches and the elements that are themselves are sequences are sub-trees.
+
+```
+             ( (1 2) 3 4 )
+            /       |     \
+           /        |      \
+          /         |       \
+       (1 2)        3        4
+      /     \
+     /       \
+    /         \
+   1           2
+```
+
+Recursion is a natural way to deal with the trees (often such self closed structures are called recursive).  The operation on the tree reduces to operation on its branches, then on the branches of the branches and all the way down to the leaves of the tree (single elements of the tree, not having any ancestry).
+
+For example, let's compare `length` procedure from previous section to `count-leaves` procedure, which returns the total of leaves of the tree:
+
+```lisp
+(define x (cons (list 1 2) (list 3 4)))
+
+(length x)
+; -> 3
+
+(count-leaves x)
+; -> 4
+
+(list x x)
+(((1 2) 3 4) ((1 2) 3 4))
+
+(length (list x x))
+; -> 2
+
+(count-leaves (list x x))
+; -> 8
+```
+
+Recursive plan for `length` is:  
+
+- Length is 1, plus length of the `cdr` of the list;
+- Length is 0 for empty list.
+
+Recursive plan for `count-leaves` needs to take into account the fact that on the reduction step we may have another sequence - a subtree. Thus, the reduction steps look like this:
+
+- Number of leaves of a tree is `count-leaves` of `car` of the tree (since it can itself be sequence) plus `count-leaves` of the `cdr` of the tree;
+- Number of leaves of a tree if it is a single leaf is 1;
+- Number of leaves of empty tree (empty list) is 0.
+
+Assuming that we have a procedure to check of an object is a pair, named `pair?` (Scheme specification provides such primitive), we can implement this plan into code:
+
+```lisp
+(define (count-leaves x)
+  (cond ((null? x) 0)  
+        ((not (pair? x)) 1)
+        (else (+ (count-leaves (car x))
+                 (count-leaves (cdr x))))))
+```
+
+**Exercises**
+- [Exercise 2.24 Providing representation of sequence data structure constructed with lists](./exercises/ex2-24.scm)
+- [Exercise 2.25 Accessing elements in nested lists](./exercises/ex2-25.scm)
+- [Exercise 2.26 Working out results of operations on lists. Append, cons, etc.](./exercises/ex2-26.scm)
+- [Exercise 2.27 Implementing `deep-reverse` procedure to work on the nested sequences](./exercises/ex2-27.scm)
+- [Exercise 2.28 Implementing `fringe` procedure to flatten a tree into flat sequence, i.e. list.](./exercises/ex2-28.scm)
+- [Exercise 2.29 Creating binary mobile structure representation. Defining selectors for it. Defining `weight` procedure to compute weight accordingly. Finding balanced mobiles. Changing to new representation.](./exercises/ex2-29.scm)
 
 
+**Mapping over trees**
+
+Map is a powerful concept not only for flat sequences, but also trees. With combination of map and recursion we can have many operations, applied to each leaf of the tree, yielding useful results.
+
+How we can use map with trees.
+
+Take `scale-tree` procedure, which does the same thing as `scale-list`.  
+We can implement it with recursive plan just as `count-leaves` procedure.
+
+```lisp
+(define (scale-tree tree factor)
+  (cond ((null? tree) nil)
+        ((not (pair? tree)) (* tree factor))
+        (else (cons (scale-tree (car tree) factor)
+                    (scale-tree (cdr tree) factor)))))
+                    
+(scale-tree (list 1 (list 2 (list 3 4) 5) (list 6 7))
+            10)
+; -> (10 (20 (30 40) 50) (60 70))
+```
+
+However, it is possible to treat the tree as a sequence of sub-trees, in which case we can map over this sequence and apply scaling, descending down with recursion if necessary.
+
+```lisp
+(define (scale-tree tree factor)
+  (map (lambda (sub-tree)
+         (if (pair? sub-tree)
+             (scale-tree sub-tree factor)
+             (* sub-tree factor)))
+       tree))
+```
+
+**Exercises**
+
+- [Exercise 2.30 Defining `square-tree` procedure](./exercises/ex2-30.scm)
+- [Exercise 2.31 Generalizing `square-tree` procedure and produce `map-tree`, expressing higher level abstraction.](./exercises/ex2-31.scm)
+- [Exercise 2.32 Defining procedure to generate all sub-sets of a set. Explanation.](./exercises/ex2-32.scm)
