@@ -83,18 +83,18 @@ As an alternative, it is possible to work with scheme online here - [repl](http:
 
 Many of these links are readily available online in the first search page or in the home page of this course on Open Course Ware from MIT, but it is still useful to list them here. There are more links to useful resources throught the book.
 
-- [SICP Website](https://mitpress.mit.edu/sites/default/files/sicp/index.html);
-- [The book](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html);
-- [MIT Course Ware home and video lectures](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/index.htm);
-- [Youtube playlist with video lectures](https://www.youtube.com/watch?v=2Op3QLzMgSY&list=PLE18841CABEA24090);
-- [Thrid party instruction on installing MIT Scheme and Setup](http://www.shido.info/lisp/scheme1_e.html);
-- [MIT Scheme home](https://www.gnu.org/software/mit-scheme/);
-- [Racket](https://download.racket-lang.org/);
+- [SICP Website](https://mitpress.mit.edu/sites/default/files/sicp/index.html)
+- [The book](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html)
+- [MIT Course Ware home and video lectures](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/index.htm)
+- [Youtube playlist with video lectures](https://www.youtube.com/watch?v=2Op3QLzMgSY&list=PLE18841CABEA24090)
+- [Thrid party instruction on installing MIT Scheme and Setup](http://www.shido.info/lisp/scheme1_e.html)
+- [MIT Scheme home](https://www.gnu.org/software/mit-scheme/)
+- [Racket](https://download.racket-lang.org/)
 - [SICP Racket collections](https://docs.racket-lang.org/sicp-manual/index.html)
-- [Edwin installition](https://docs.racket-lang.org/sicp-manual/index.html);
-- [Edwin user guide](http://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_8.html);
-- [Don't panic guide](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/tools/dontpanicnew.pdf);
-- [Beating the Averages (a small story about using lisp in startup)](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/tools/dontpanicnew.pdf);
-- [Useful Math resource if you need some brush up](http://www.mathtutor.ac.uk);
+- [Edwin installition](https://docs.racket-lang.org/sicp-manual/index.html)
+- [Edwin user guide](http://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_8.html)
+- [Don't panic guide](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/tools/dontpanicnew.pdf)
+- [Beating the Averages (a small story about using lisp in startup)](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/tools/dontpanicnew.pdf)
+- [Useful Math resource if you need some brush up](http://www.mathtutor.ac.uk)
 
 ---
