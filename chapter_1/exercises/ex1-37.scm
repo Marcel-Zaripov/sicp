@@ -3,8 +3,8 @@
 ; f = n_1 / (d_1 + n_2 / (d_2 + n_3 / (d_3 + ...)))
 
 ; As an example, one can show that the infinite continued fraction expansion with
-; the Ni and the Di all equal to 1 produces 1/,
-; where  is the golden ratio (described in section 1.2.2).
+; the Ni and the Di all equal to 1 produces 1/phi,
+; where phi is the golden ratio (described in section 1.2.2).
 ; One way to approximate an infinite continued fraction is to truncate
 ; the expansion after a given number of terms.
 ; Such a truncation -- a so-called k-term finite continued fraction -- has the form:
