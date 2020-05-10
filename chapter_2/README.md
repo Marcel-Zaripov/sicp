@@ -20,7 +20,7 @@ For example, if we want to develop a package for dealing with rational numbers, 
 
 Data abstraction increases modularity of our programs, isolating parts of program that are responsible for representation of data from the parts of program that use data for computation.
 
-The us of compound data also increases expressive power of programming language.  
+The use of compound data also increases expressive power of programming language.  
 For example, if we consider a *Linear combination* like `ax + ab` can be expressed in lisp like:
 
 ```lisp
@@ -223,7 +223,7 @@ Thus, we can show the structure of rational number systems as:
            However pairs are implemented
 ```
 
-Each part of the complex structure may be independently changed, thus such idea give ease in maintenance and modification.
+Each part of the complex structure may be independently changed, thus such an idea gives ease in maintenance and modification.
 
 Any complex data can be represented by a variety of the primitive data types. Logically, the choice of representation influences how a program operates on it. If we have to change representation for the data all programs using it will have to change accordingly. It may be hard and tedious in the case of large systems, unless we confine the dependence on the representation to a very few parts of program.
 

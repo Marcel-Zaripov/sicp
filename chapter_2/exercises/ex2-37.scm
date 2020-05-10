@@ -17,7 +17,7 @@
 
 ; (transpose mat) - returns the matrix n, where n[i][j] = m[j][i]
 
-; We can define the dot product as17
+; We can define the dot product as:
 
 (define (dot-product v w)
   (accumulate + 0 (map * v w)))

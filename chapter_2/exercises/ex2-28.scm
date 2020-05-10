@@ -32,7 +32,7 @@
 (fringe y)
 (1 2 3 4 5 6)
 
-; iterative
+; iterative, somewhat - need to fringe the car if it is list in itself
 ; Does not work on some interpreters for some reason
 (define (fringe items)
   (define (iter it result)

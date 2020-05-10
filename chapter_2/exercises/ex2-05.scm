@@ -13,7 +13,7 @@
 ; the resulting integer is divisable into 2
 ; and then factor out 2 to this power,
 ; which will leave us with some exponent of 3
-; the same will be done to vise versa to get
+; the same will be done vise versa to get
 ; initial values of a and b.
 
 ; there is no easy way to factor out 2 from product of its power and 3 to some power,

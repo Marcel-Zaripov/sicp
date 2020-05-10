@@ -56,8 +56,8 @@
 ; a) selectors:
 (define left-branch car)
 (define right-branch cadr)
-(define branch-length left-branch)
-(define branch-structure right-branch)
+(define branch-length car)
+(define branch-structure cadr)
 
 ; for testing:
 (define a (make-branch 2 2))

@@ -1,4 +1,4 @@
-; Exercise 2.30. Define a procedure square-tree analogous to the square-list procedure of exercise 2.21. That is, square-list should behave as follows:
+; Exercise 2.30. Define a procedure square-tree analogous to the square-list procedure of exercise 2.21. That is, square-tree should behave as follows:
 
 (square-tree
  (list 1
@@ -13,7 +13,7 @@
 ; direct implementation:
 (define (square-tree tree)
    (cond ((null? tree) null)
-         ((not (pair? tree)) (* tree tree))
+         ((not (pair? tree)) (square tree))
          (else (cons (square-tree (car tree))
                      (square-tree (cdr tree))))))
 

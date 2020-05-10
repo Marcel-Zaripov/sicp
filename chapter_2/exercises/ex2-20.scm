@@ -43,7 +43,7 @@
 
 ; first try
 (define (same-parity . numbers)
-  (let ([ed-parity (remainder (car numbers) 2)])
+  (let ((ed-parity (remainder (car numbers) 2))
     (define (p n)
       (if (null? n)
         (list)
@@ -57,8 +57,8 @@
   (define (proc numbers)
     (if (null? numbers)
         (list)
-        (if (even? (+ (car numbers) head))
-            (append (list (car numbers)) (proc (cdr numbers)))
+        (if (even? (+ (car numbers) head)) ; if both numbers are even, then their sum is also even
+            (cons (car numbers) (proc (cdr numbers)))
             (proc (cdr numbers)))))
   (cons head (proc tail)))
 

@@ -36,7 +36,7 @@
 
 ; EXPLANATION:
 ; the idea of constructing all the subsets is in the fact that for each subset, we can choose to either include
-; an element or not. From this point of choice, we need to explore all possibilities coming out from this choice.
+; an element or not. From this point, we need to explore all possibilities coming out from this choice.
 ; For example, in the set (1 2 3), if we construct the set of length 2 and we decided to include 1,
 ; we have two possibilities left: either including 2 or 3. That yields us two possible sets of length 2 and
 ; starting with 1: (1 2) and (1 3). We will need to keep exploring, while we have not exhausted our possibilities.

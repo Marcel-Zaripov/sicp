@@ -22,6 +22,8 @@
 
 ; SOLUTION:
 
+; opperation must have commutative property in order to yield same results for fold-right and fold-left
+
 ; having fold-right and fold-left defined as:
 
 (define (fold-right op initial sequence)
